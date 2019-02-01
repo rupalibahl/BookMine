@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	background-color: #2D9CDB;
+}
+#top {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	width: 100%;
+	height: 150px;
+	background-color: #6FCF97;
+	margin: 0;
+}
+#top h1 {
+	position: relative;
+	font-family: 'Roboto', sans-serif;
+	font-size: 3em;
+	padding-left: 20px;
+	-webkit-text-stroke: 4px black;
+	margin:0;
+	top: 30%;
+} 
+
+#middle
+{
+	margin-top: 200px;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+}
+
+#signupButton
+{
+	text-align: center;
+	background-color: #424243;
+	height: 40px;	
+	width: 100px;
+	color: white;
+	margin-top: 30px;
+	margin: 40px;
+	align: center;
+	font-size: 15px;
+	font-family: arial;
+}
+
+#menu
+{
+	padding-left: 450px;
+	padding-top: 20px;
+	text-align: left;
+	
+} 
+
+#middle h1
+{
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 70px;
+	color: white;
+	padding-left: 20px;
+	-webkit-text-stroke: 3px black;
+	margin:0;
+	top: 30%;
+}
+
+#password
+{
+	height: 20px;
+	width: 400px;
+}
+#username
+{
+	height: 20px;
+	width: 400px;
+}
+#imgUrl
+{
+	height: 20px;
+	width: 400px;
+}
+
+#top a {
+	text-decoration: none;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	-webkit-text-stroke: 2px black;
+	font-weight: bold;
+	
+}
+
+#bottom
+{
+	z-index: 1;
+	top: 0;
+	width: 100%;
+	height: 150px;
+	background-color: #6FCF97;
+	margin: 0;
+}

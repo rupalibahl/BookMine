@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="home.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:900" rel="stylesheet">
+
+<script>
+
+	window.onload = function()
+	{
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("POST", "readData", false);
+		xmlhttp.send();
+	}
+
+</script>
+
+</head>
+<body>
+
+	<div id="top"></div>
+	<div id="search-container">
+		<h1>BookMine</h1>
+		<form name="myform" method="GET" action="Results.jsp" >
+			<input type="text" name="search" placeholder="Search..." /> 
+			<div id="search-icon-container">
+			<img id="search-icon" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-search-strong-128.png" />
+			</div>
+			<br />
+			
+				<input class="intitle" id="intitle" type="radio" name="radio" value="intitle" class="radio" checked="checked">
+						<label class="intitle" for="intitle">Title</label>
+						<input class="isbn" id="isbn" type="radio" name="radio" value="isbn" class="radio">
+						<label class="isbn" for="isbn">ISBN</label>
+						
+						<br />
+						
+						<input class="inauthor" id="inauthor" type="radio" name="radio" value="inauthor" class="radio">
+						<label class="inauthor" for="author">Author</label>
+						<input class="subject" id="subject" type="radio" name="radio" value="subject" class="radio">
+						<label class="subject" for="subject">Genre</label>
+			
+				
+				<input type="submit" style="display:none" />
+		</form> 
+		
+		<form name = "login" method = "GET" action = "login.jsp">
+			<input type = "submit" value ="login" name = "login" class = "button">
+		</form>
+		
+		<form name = "signup" method = "GET" action = "SignUp.jsp">
+			<input type = "submit" value ="signup" name = "signup" class = "button">
+		</form>
+		
+	</div>
+	<div id = "bottom"></div>
+	
+</body>
+</html>
