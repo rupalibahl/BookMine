@@ -136,6 +136,19 @@ td a {
     border:3px solid black;;
 }
 
+#profilePic {
+    /* background: skin-tone.jpg;
+    background-size: cover; */
+    border-radius:50% 50% 50% 50%;
+    width:200px;
+    height:200px;
+   	/* margin-top:200px;
+    margin: 200px;
+    margin-left:100px; */
+    margin-bottom: 20px;
+    border:3px solid black;;
+}
+
 #minicircle
 {
 	border-radius:50% 50% 50% 50%;

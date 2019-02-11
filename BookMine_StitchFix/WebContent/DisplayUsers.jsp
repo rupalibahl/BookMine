@@ -26,24 +26,9 @@
 
 <%
 	HttpSession sessionn = request.getSession();
-	//UserList u = (UserList)request.getSession().getAttribute("list");
-	Users u = new Users();
-	//u = (Users)request.getSession().getAttribute("currUser");
-	String searchedUser = (String) request.getParameter("username");
-	UserList userList = (UserList)request.getSession().getAttribute("list");
-	if(userList.getUsers().isEmpty())
-	{
-		System.out.println("EMPTY USER LIST");
-	}
-	for(Users user: userList.getUsers())
-	{
-		if(user.getUsername() == searchedUser)
-		{
-			u = user;
-		}
-	}
-	System.out.println(u.getUsername());
-
+	Users searchedUser = new Users();
+	searchedUser = (Users)request.getSession().getAttribute("searchedUser");
+	System.out.println("searched user name: " + searchedUser.getUsername());
 %>
 
 <div id="top">
@@ -69,9 +54,9 @@
 	</div>
 	
 	<div id = "leftbar">
-		<img src= <%=u.getImageURL() %> id="circle">
+		<img src= <%=searchedUser.getImageURL() %> id="profilePic">
 		
-		<p id = "name">@<%=u.getUsername() %>   </p>
+		<p id = "name">@<%=searchedUser.getUsername() %>   </p>
 
 		<div class="tab">
 		  <button class="tablinks" onclick="followFunc(event, 'Following')">Following</button>
@@ -80,16 +65,16 @@
 		
 		<div id="Following" class="tabcontent">
 		  <%
-		  System.out.println(u.getFollowing().size());
-		  for(int i = 0; i < u.getFollowing().size(); i++){ %> 
-			@<%out.println(u.getFollowing().get(i)); %>
+		  System.out.println(searchedUser.getFollowing().size());
+		  for(int i = 0; i < searchedUser.getFollowing().size(); i++){ %> 
+			@<%out.println(searchedUser.getFollowing().get(i)); %>
 			  <br>
 		  <%}%>
 		</div>
 		
 		<div id="Followers" class="tabcontent">
-		  <%for(int i = 0; i < u.getFollowers().size(); i++){ %> 
-			@<%out.println(u.getFollowers().get(i)); %>
+		  <%for(int i = 0; i < searchedUser.getFollowers().size(); i++){ %> 
+			@<%out.println("followers: " + searchedUser.getFollowers().get(i)); %>
 			  <br>
 		  <%}%>
 		</div>
@@ -112,11 +97,11 @@
 	</div>
 	
 	<div id = "mainTable">
-		<div id = myUser> @<%u.getUsername(); %>'s Library</div>
+		<div id = myUser> @<%=searchedUser.getUsername() %>'s Library</div>
 		<div id = "fav"> Favorites </div>
 		<div id = "favList">
-			<%for(int i = 0; i < u.getFollowers().size(); i++){ %> 
-				@<%out.println(u.getLibrary().getFavorite().get(i)); %>
+			<%for(int i = 0; i < searchedUser.getFollowers().size(); i++){ %> 
+				@<%out.println(searchedUser.getLibrary().getFavorite().get(i)); %>
 				  <br>
 			 <%}%>
 		

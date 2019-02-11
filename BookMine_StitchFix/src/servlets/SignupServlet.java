@@ -54,7 +54,7 @@ public class SignupServlet extends HttpServlet {
 		
 		if(username != null && password != null && imgUrl != null)
 		{
-			System.out.println("users size: " + u.getUsers().size());
+			//System.out.println("users size: " + u.getUsers().size());
 			
 			for(Users u1 : u.getUsers())
 			{
@@ -96,6 +96,7 @@ public class SignupServlet extends HttpServlet {
 				u.getUsers().add(curr);
 				session.setAttribute("loggedIn", username);
 				session.setAttribute("userslist", u);
+				session.setAttribute("currUser", curr);
 				out.flush();
 				request.getRequestDispatcher("/Results.jsp").forward(request, response);
 			}

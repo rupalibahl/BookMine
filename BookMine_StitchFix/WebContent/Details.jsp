@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>Insert title here</title>
+<title>Book Details</title>
 <style>
 i {
 		font-size: 36px; !important;
@@ -13,6 +13,23 @@ i {
 	}
 </style>
 <link rel="stylesheet" type="text/css" href="details.css">
+
+	<script>
+		function validate()
+		{
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "favoriteServlet?bookToAdd=" + titleText, false);
+			xhttp.send();
+			if(xhttp.responseText.trim().length > 0)
+			{
+				document.getElementById("formerror").innerHTML = xhttp.responseText;
+				return false;
+			}
+			return true;
+		}
+	
+	</script>
+		
 </head>
 <body>
 	<div id="top">
@@ -35,6 +52,10 @@ i {
 					<label for="subject">Genre</label>
 				</div>
 		</form>
+		<form name = "Search Users" method = "GET" action = "UserSearch.jsp">
+			<input type = "submit" value = "Search Users" class = "searchUser" style="color:white; background-color: #424243; height: 30px;
+			width: 150px;align: center; font-size: 15px;text-align: center; margin-left: 20px; margin-top: -6px">
+		</form>
 	</div>
 	<table id="table">
 		<tr id="results">
@@ -55,6 +76,11 @@ i {
 				<div id="rating">
 					<h1><span>Rating:</span></h1>
 				</div>
+				 <!-- <form name = "addToFav" method = "GET" action = "favoriteServlet" onsubmit = "return validate()">
+					<input type = "submit" value ="Add to Fav" name = "Add to Fav" id = "followButton" class = "button">
+				</form> -->
+				<a href="" id="favoriteLink">Add to Favorites</a> 
+				<a href="" id="readLink">Add to Read</a> 
 			</td>
 		</tr>
 	</table>
@@ -147,23 +173,7 @@ xhttp.onreadystatechange = function() {
 			descriptionDiv.appendChild(description);
 		}
 		
-		//Rating -- More work to do here.
-		
-                //Volume volume = (Volume)request.getAttribute("volume");
-                //if (volume != null && volume.getVolumeInfo().getAverageRating() != null) {
-                 //   for (int i = 0; i < Math.round(volume.getVolumeInfo().getAverageRating()); i++) {
-                   //     
-                   // }
-               // }
-              /*   if(jsonResponse.volumeInfo.hasOwnProperty("averageRating")) {
-                	for(int i=0; i < Math.round(volume.getVolumeInfo().getAverageRating()); i++) {
-                		var star = document.createElement("i");
-                		star.classList.add("fa");
-                		star.classList.add("fa-star");
-                		ratingDiv.appendChild(star);
-                	}
-                } */
-          
+		//Rating
 		 if(jsonResponse.volumeInfo.hasOwnProperty("averageRating")) {
 			var rating = jsonResponse.volumeInfo.averageRating;
 			var counter = 0;
@@ -176,7 +186,6 @@ xhttp.onreadystatechange = function() {
 			}
 		
 			console.log(rating);
-		//	console.log(counter);
 			//We need to add a half star if this is true
 			if(rating > counter) {
 				var star = document.createElement("i");
@@ -201,6 +210,8 @@ xhttp.onreadystatechange = function() {
 			ratingDiv.appendChild(rating);
 		} 
 		
+			document.getElementById("favoriteLink").href = "favoriteServlet?bookToAdd=" + jsonResponse.volumeInfo.title;
+			document.getElementById("readLink").href = "readServlet?bookToAdd=" + jsonResponse.volumeInfo.title
 	}
 };
 console.log(query);

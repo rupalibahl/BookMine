@@ -54,6 +54,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		{
 			//currUser = u;
 			System.out.println("user found");
+			request.getSession().setAttribute("searchedUser", u);
 			userFound = true;
 			request.getRequestDispatcher("/DisplayUsers.jsp").forward(request, response);
 		}

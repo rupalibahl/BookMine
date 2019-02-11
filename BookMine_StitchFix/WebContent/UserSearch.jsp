@@ -43,8 +43,7 @@
 		{
 			fr = new FileReader(getServletContext().getRealPath("Sample.json"));
 			user = gson.fromJson(fr, UserList.class);
-			
-			System.out.println(user.getUsers().get(1).getUsername());
+			//System.out.println(user.getUsers().get(1).getUsername());
 		}
 		catch (FileNotFoundException e) 
 		{

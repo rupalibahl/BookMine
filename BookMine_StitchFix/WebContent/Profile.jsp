@@ -6,6 +6,8 @@
 <%@ page import="java.io.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="bookmine.UserList" %>
+<%@  page import ="bookmine.UserList" %>
+<%@  page import = "bookmine.Users" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,29 +21,13 @@
 
 	<% 
 	
-		FileReader fr; 
-		UserList user = null;
-		Gson gson = new Gson();
-		try
+		HttpSession sessionn = request.getSession();
+		//UserList u = (UserList)request.getSession().getAttribute("list");
+		Users u = (Users)request.getSession().getAttribute("currUser");
+		if(u == null)
 		{
-			fr = new FileReader(getServletContext().getRealPath("Sample.json"));
-			user = gson.fromJson(fr, UserList.class);
-			
-			System.out.println(user.getUsers().get(1).getUsername());
+			System.out.println("USER IS EMPTY OMG");
 		}
-		catch (FileNotFoundException e) 
-		{
-			System.out.println("That file could not be found");
-		 }
-		 catch(com.google.gson.JsonSyntaxException e)
-		 {
-			 System.out.println("That file is not a well-formed JSON file.");
-		 }
-		 catch(JsonParseException e)
-		 {
-			e.printStackTrace();
-		 }
-		
 		/* int in = (int)session.getAttribute("index"); */
 	%>
 	<div id="top">
@@ -64,14 +50,18 @@
 					<label for="subject">Genre</label>
 				</div>
 		</form>
+		<form name = "Search Users" method = "GET" action = "UserSearch.jsp">
+			<input type = "submit" value = "Search Users" class = "searchUser" style="color:white; background-color: #424243; height: 30px;
+			width: 150px;align: center; font-size: 15px;text-align: center; margin-left: 20px; margin-top: -6px">
+		</form>
 		
-		<img src= <%=user.getUsers().get(1).getImageURL() %> id="minicircle" onclick = "location.href = 'Profile.jsp'">
+		<img src= <%=u.getImageURL() %> id="minicircle" onclick = "location.href = 'Profile.jsp'">
 	</div>
 	
 	<div id = "leftbar">
-		<img src= <%=user.getUsers().get(1).getImageURL() %> id="circle">
+		<img src= <%=u.getImageURL() %> id="circle">
 		
-		<p id = "name">@<%=user.getUsers().get(1).getUsername() %>   </p>
+		<p id = "name">@<%=u.getUsername() %>   </p>
 
 		<div class="tab">
 		  <button class="tablinks" onclick="followFunc(event, 'Following')">Following</button>
@@ -80,15 +70,15 @@
 		
 		<div id="Following" class="tabcontent">
 		
-		  <%for(int i = 0; i < user.getUsers().get(1).getFollowing().size(); i++){ %> 
-			<%out.println(user.getUsers().get(1).getFollowing().get(i)); %>
+		  <%for(int i = 0; i < u.getFollowing().size(); i++){ %> 
+			<%out.println(u.getFollowing().get(i)); %>
 			  <br />
 		  <%}%>
 		</div>
 		
 		<div id="Followers" class="tabcontent">
-		  <%for(int i = 0; i < user.getUsers().get(1).getFollowers().size(); i++){ %> 
-			<%out.println(user.getUsers().get(1).getFollowers().get(i));%>
+		  <%for(int i = 0; i < u.getFollowers().size(); i++){ %> 
+			<%out.println(u.getFollowers().get(i));%>
 			  <br />
 		  <%}%>
 		</div>
@@ -118,15 +108,16 @@
 		</div>
 		
 		<div id="Read" class="tabcontent2">
-		  <%for(int i = 0; i < user.getUsers().get(1).getLibrary().getRead().size(); i++){ %> 
-			<%out.println(user.getUsers().get(1).getLibrary().getRead().get(i)); %>
+		  <%for(int i = 0; i < u.getLibrary().getRead().size(); i++){ %> 
+			<%out.println(u.getLibrary().getRead().get(i)); %>
 			  <br>
 		  <%}%>
 		</div>
 		
 		<div id="Favorites" class="tabcontent2">
-		  <%for(int i = 0; i < user.getUsers().get(1).getLibrary().getFavorite().size(); i++){ %> 
-			<%out.println(user.getUsers().get(1).getLibrary().getFavorite().get(i)); %>
+			<% System.out.println("FAV SIZE: " + u.getLibrary().getFavorite().size()); %>
+		  <%for(int i = 0; i < u.getLibrary().getFavorite().size(); i++){ %> 
+			<%out.println(u.getLibrary().getFavorite().get(i)); %>
 			  <br>
 		  <%}%>
 		</div>
@@ -149,7 +140,11 @@
 	
 	</div>
 	
-	<div id=followButton> Logout </div>
+	<!-- <div id=followButton> Logout </div> -->
+	
+	<form name = "login" method = "GET" action = "index.html">
+			<input type = "submit" value ="Logout" name = "Logout" id = "followButton" class = "button">
+		</form>
 	
 </body>
 </html>

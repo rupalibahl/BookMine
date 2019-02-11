@@ -5,6 +5,12 @@ public class Library {
 	
 	private ArrayList<String> read;
 	private ArrayList<String> favorite;
+	
+	public Library()
+	{
+		read = new ArrayList<String>();
+		favorite = new ArrayList<String>();
+	}
 
 	public ArrayList<String> getRead() {
 		return read;
